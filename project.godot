@@ -8,15 +8,25 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "Boid",
+"language": "GDScript",
+"path": "res://Boid.gd"
+} ]
 _global_script_class_icons={
-
+"Boid": ""
 }
 
 [application]
 
 config/name="Boids"
+run/main_scene="res://BoidNode2D.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/fullscreen=true
 
 [rendering]
 
