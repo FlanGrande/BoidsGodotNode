@@ -136,7 +136,7 @@ func limitSpeed(boid : Boid):
 
 func drawBoid(boid : Boid):
 	boid.position = Vector2(boid.x, boid.y)
-	boid.rotation = atan2(boid.dy, boid.dx)
+	boid.rotation = atan2(boid.dx, -boid.dy)
 	#move_to
 	#draw_trail
 	pass
