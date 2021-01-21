@@ -13,7 +13,6 @@ var offset = 10
 # Boid history of positions?
 var history = []
 
-
 func _ready():
 	pass
 
@@ -24,4 +23,3 @@ func initBoid(window_width, window_height):
 	dy = rand_range(0, d) - offset
 	history = []
 	return self
-
