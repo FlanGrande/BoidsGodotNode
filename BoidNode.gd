@@ -38,7 +38,10 @@ export(float, 0, 9999.0) var flyTowardsMouseVisualRange = 200
 export(float, 0, 9999.0) var avoidMouseMinDistance = 100 # The distance to stay away from other boids # CONST?
 export(float, -999.0, 999.0) var avoidMouseFactor = 0.05 # Adjust velocity by this % # CONST?
 
-export(int, 0, 1000) var boidHistoryLength = 50 # Also trail length
+export(bool) var trailEnabled = false
+export(Color) var trailColor = Color(1.0, 0.0, 0.0, 1.0)
+export(float) var trailWidth = 1.0
+export(int, 0, 1000) var boidHistoryLength = 20 # Also trail length
 
 
 var boids = []
@@ -47,11 +50,12 @@ var boids = []
 func _ready():
 	for i in range(numBoids):
 		var new_boid = boid_scene.instance()
-		boids.push_back(new_boid.initBoid(window_width, window_height))
+		boids.push_back(new_boid.initBoid(window_width, window_height, trailEnabled, trailColor, trailWidth, boidHistoryLength))
 		add_child(new_boid)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	var i = 0
 	for boid in boids:
 		# Update the velocities according to each rule
 		flyTowardsCenter(boid)
@@ -67,11 +71,10 @@ func _process(delta):
 		#Update the position based on the current velocity
 		boid.x += boid.dx;
 		boid.y += boid.dy;
-		boid.history.push_back([boid.x, boid.y])
-		if(boid.history.size() > boidHistoryLength): # This will probably give me some issues.
-			boid.history.pop_front() # This will probably give me some issues.
+		boid.addToHistory(Vector2(boid.x, boid.y), i)
 		
 		drawBoid(boid)
+		i += 1
 
 
 # Constrain a boid to within the window. If it gets too close to an edge,
@@ -191,9 +194,6 @@ func avoidMouse(boid : Boid):
 func drawBoid(boid : Boid):
 	boid.position = Vector2(boid.x, boid.y)
 	boid.rotation = atan2(boid.dx, -boid.dy)
-	#move_to
-	#draw_trail
-	pass
 
 func _input(event):
 	if event is InputEventMouseMotion:

@@ -23,6 +23,10 @@ __meta__ = {
 
 [node name="BoidNode" type="Node2D" parent="."]
 script = ExtResource( 1 )
+numBoids = 10
+keepWithinBoundsMargin = 2.0
+trailEnabled = true
+boidHistoryLength = 250
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 512, 300 )
