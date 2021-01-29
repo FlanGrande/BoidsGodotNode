@@ -23,8 +23,8 @@ __meta__ = {
 
 [node name="BoidNode" type="Node2D" parent="."]
 script = ExtResource( 1 )
-numBoids = 10
 keepWithinBoundsMargin = 2.0
+mouseInteractionsEnabled = true
 trailEnabled = true
 boidHistoryLength = 250
 

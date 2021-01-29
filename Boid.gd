@@ -37,6 +37,7 @@ func initBoid(window_width, window_height, trail_enabled, trail_color, trail_wid
 	if(trailEnabled):
 		trailLine2D = Line2D.new()
 		trailLine2D.default_color = trailColor
+		trailLine2D.default_color = Color(rand_range(0, 1),rand_range(0, 1),rand_range(0, 1))
 		trailLine2D.width = trailWidth
 		trailLine2D.z_index = -1
 		add_child(trailLine2D)

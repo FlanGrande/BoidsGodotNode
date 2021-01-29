@@ -30,6 +30,9 @@ export(float, -999.0, 999.0) var matchVelocityFactor = 0.05 # Boids adjust their
 # limitSpeed
 export(float, 0, 9999.0) var speedLimit = 5 # Maximum speed of a boid.
 
+# Mouse options
+export(bool) var mouseInteractionsEnabled
+
 # flyTowardsMouse
 export(float, -999.0, 999.0) var flyTowardsMouseFactor = 0.005; # adjust velocity by this % # CONST?
 export(float, 0, 9999.0) var flyTowardsMouseVisualRange = 200
@@ -62,8 +65,9 @@ func _process(delta):
 		avoidOthers(boid)
 		matchVelocity(boid)
 		
-		flyTowardsMouse(boid)
-		avoidMouse(boid)
+		if(mouseInteractionsEnabled):
+			flyTowardsMouse(boid)
+			avoidMouse(boid)
 		
 		limitSpeed(boid)
 		keepWithinBounds(boid)
